@@ -14,11 +14,11 @@ const NodeBird = ({ Component }) => {
       </Head>
       <Component />
     </>
-  )
-}
+  );
+};
 
 NodeBird.propTypes = {
   Component: propTypes.elementType.isRequired,
-}
+};
 
 export default NodeBird;

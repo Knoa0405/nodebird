@@ -10,23 +10,30 @@ const ButtonWrapper = styled.div`
   margin-top : 10px;
 `;
 
-const LoginForm = () => {
+const FormWrapper = styled(Form)`
+  padding : 10px;
+`;
+
+const LoginForm = ({ setIsLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const onChangeId = useCallback((e) => {
-    setId(e.target.value);
+    setEmail(e.target.value);
   }, []);
 
   const onChangePassword = useCallback((e) => {
-    setId(e.target.value);
+    setPassword(e.target.value);
   }, []);
 
+  const onSubmitForm = useCallback(() => {
+    console.log(email, password);
 
-
+    setIsLoggedIn(true);
+  }, [email, password]);
 
   return (
-    <Form>
+    <FormWrapper onFinish={onSubmitForm}>
       <div>
         <label htmlFor="user-id">아이디</label>
         <br />
@@ -46,15 +53,15 @@ const LoginForm = () => {
           type="password"
           onChange={onChangePassword}
           value={password}
-          placeholder="이메일"
+          placeholder="비밀번호"
         />
       </div>
       <ButtonWrapper >
         <Button type="primary" htmlType="submit" loading={false}>로그인</Button>
         <Link href="/signup"><a><Button>회원가입</Button></a></Link>
       </ButtonWrapper>
-    </Form>
-  )
-}
+    </FormWrapper>
+  );
+};
 
 export default LoginForm;

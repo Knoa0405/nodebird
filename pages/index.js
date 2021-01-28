@@ -7,7 +7,7 @@ const Home = () => {
     <AppLayout>
       <div>Home</div>
     </AppLayout>
-  )
-}
+  );
+};
 
 export default Home;
