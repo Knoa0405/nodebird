@@ -1,3 +1,42 @@
+import { all, fork, call, take, put } from 'redux-saga';
+import axios from 'axios';
+
+function logInAPI () {
+  return axios.post('/api/login');
+}
+
+function* logIn() {
+  try {
+    const result = yield call(logInAPI);
+
+    yield put({
+      type : 'LOG_IN_SUCCESS',
+      data : result.data
+    });
+  } catch(err) {
+    yield put({
+      type : 'LOG_IN_FAILURE',
+      data : err.reponse.data
+    });
+  }
+}
+
+function* watchLogin() {
+  yield take('LOG_IN_REQUEST' ,logIn);
+}
+
+function* watchLogOut() {
+  yield take('LOG_OUT_REQUEST');
+}
+
+function* watchAddPost() {
+  yield take('ADD_POST_REQUEST');
+}
+
 export default function* rootSaga() {
-  // saga generator function
+  yield all([
+    fork(watchLogin),
+    fork(watchLogOut),
+    fork(watchAddPost),
+  ]);
 }
