@@ -1,4 +1,4 @@
-import { all, fork, call, take, put } from 'redux-saga';
+import { all, fork, call, takeLatest, put } from 'redux-saga';
 import axios from 'axios';
 
 function logInAPI (data) {
@@ -65,15 +65,16 @@ function* addPost() {
 // 다양한 이펙트가 있기 때문에 원리를 알아두면 좋다.
 // 이벤트 리스너 같은 느낌?
 function* watchLogin() {
-  yield take('LOG_IN_REQUEST' ,logIn);
+  yield takeLatest('LOG_IN_REQUEST' ,logIn);
 }
-
+// takeLatest 중복 응답을 취소
+// throttle 2초 동안 post 요청 한번만 보내도록 설정
 function* watchLogOut() {
-  yield take('LOG_OUT_REQUEST', logOut);
+  yield takeLatest('LOG_OUT_REQUEST', logOut);
 }
 
 function* watchAddPost() {
-  yield take('ADD_POST_REQUEST', addPost);
+  yield takeLatest('ADD_POST_REQUEST', addPost);
 }
 
 export default function* rootSaga() {
