@@ -4,7 +4,7 @@ import propTypes from 'prop-types';
 import Link from 'next/link';
 import { Input, Menu, Row, Col } from 'antd';
 
-import LoginForm from './LoginForm';
+import LogInForm from './LogInForm';
 
 import UserProfile from './UserProfile';
 
@@ -54,7 +54,7 @@ const AppLayout = ({ children }) => {
       <Row gutter={8}>
         <Col xs={24} md={6} >
           {isLoggedIn ? <UserProfile /> 
-            : <LoginForm />
+            : <LogInForm />
           }
         </Col>
         <Col xs={24} md={12} >
